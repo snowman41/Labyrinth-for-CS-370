@@ -71,10 +71,11 @@ def getTileCoordinates(tileNum):#Function which gives coordinates of tile
 			xVal += 105
 	for coords in listOfCoords:
 		if(tileNum - 1 == index):			
-			print(coords)
+			#print(coords)
 			return coords
 		index += 1
 			
+
 
 
 
