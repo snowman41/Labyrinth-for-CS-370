@@ -1,3 +1,5 @@
+
+  
 #CS370
 #Labyrinth Demo
 
@@ -55,6 +57,30 @@ pygame.display.set_caption("Labyrinth")#Sets title of the screen
 gameOver = False#Loops until user closes out of game
 clock = pygame.time.Clock()#Manages how fast the screen updates
 
+class Tile:#create class for tiles characteristics
+    def __init__(self, north, south, east, west, treasure):
+        self.north = 0#A property to indicate whether the tile is open on a given side, 0 = closed, 1 = open
+        self.south = 0
+        self.east = 0
+        self.west = 0
+        self.treasure = 0#A property to store whether the tile has a treasure, when we implement separate treasures we can have this store the specific treasure name/number
+        self.p1 = 0#Stores whether player1 is on the tile, we can add additional properties when we start dealing with multiple players
+        def __str__(self):
+                return'{self.north}'
+
+#Demonstrating Tile_Array Functionality
+Tile_Array = numpy.ndarray(shape=(7,7), dtype=object)#elements are accessed by
+Tile_Array.shape
+t0 = Tile(0,1,1,0,0)#upper left corner tile
+t1 = Tile(0,1,0,1,0)#upper right corner tile
+t2 = Tile(1,0,1,0,0)#lower left corner tile
+t3 = Tile(1,0,0,1,0)#lower right corner tile
+Tile_Array[0,0]=t0
+Tile_Array[0,6]=t1
+Tile_Array[6,0]=t2
+Tile_Array[6,6]=t3
+print(Tile_Array)
+print(t2.north)
 
 
 #getTileCoordinates(12)#Gets coordinates for selected tile
