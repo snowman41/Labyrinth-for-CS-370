@@ -40,12 +40,14 @@ for row in range(numOfRows):
 	for column in range(numOfColumns):
 		grid[row].append(0)
 
-os.chdir("C:\\LabyrinthDemo")#Grabs image files from directory
+
+os.chdir("C:\LabyrinthDemo")#Grabs image files from directory
 for file in glob.glob("*.png"):
     imagePaths.append(file)
+    print(file)
+	
 
-
-
+#getTileCoordinates(13)#Gets coordinates for selected tile
 #Player_1 = Player_Class()
 
 pygame.init()#initializes pygame
@@ -55,13 +57,14 @@ pygame.display.set_caption("Labyrinth")#Sets title of the screen
 gameOver = False#Loops until user closes out of game
 clock = pygame.time.Clock()#Manages how fast the screen updates
 
+
 pygame.mixer.music.load('background.mp3')
 pygame.mixer.music.play(-1)
 
 
-
 #getTileCoordinates(12)#Gets coordinates for selected tile
 
+#>>>>>>> Architectural-Spike
 while not gameOver:
 	for event in pygame.event.get():#Empties event queue
 		if event.type == pygame.QUIT:#Sent when User presses close button
@@ -79,7 +82,14 @@ while not gameOver:
 
 	mouse = pygame.mouse.get_pos()#initialize mouse pointer
 	#click = pygame.mouse.get_pressed()#initialize mouse clicker
+
+	for x in range(49):#Filling board with tiles
+		screen.blit(getImage(imagePaths[x]), (getTileCoordinates(x + 1)))	
+
+	mouse = pygame.mouse.get_pos()#initialize mouse pointer
+	#click = pygame.mouse.get_pressed()#initialize mouse clicker
 	
+
 	screen.blit(getImage("LabyrinthTile1.png"), (255, 115)) #Placing fixed tiles
 	screen.blit(getImage("LabyrinthTile7.png"), (885, 115))
 	screen.blit(getImage("LabyrinthTile43.png"), (255, 745))
@@ -242,6 +252,60 @@ while not gameOver:
 				prog = 1
 			if event.type == pygame.MOUSEBUTTONDOWN and prog == 1:
 				prog = 0
+
+	screen.blit(getImage("LabyrinthTile1.png"), (255, 115))#Placing fixed tiles
+	screen.blit(getImage("LabyrinthTile7.png"), (885, 115))
+	screen.blit(getImage("LabyrinthTile43.png"), (255, 745))
+	screen.blit(getImage("LabyrinthTile49.png"), (885, 745))
+#<<<<<<< Architectural-Spike
+	
+#=======
+#>>>>>>> Architectural-Spike
+	left = pygame.draw.rect(screen, GRAY,(1000,650,75,50))#Create Buttons For Movement and Handle mouse clicks
+	if 1000+75 > mouse[0] > 1000 and 650+50 > mouse[1] > 650:#while mouse is within button perimitter
+			if event.type == pygame.MOUSEBUTTONUP and prog == 0:#when mouse button is released
+				print("left")
+				dirr = 0
+				player_one.move_player(dirr)#call move_player function on player and pass direction
+				prog = 1
+			if event.type == pygame.MOUSEBUTTONDOWN and prog == 1:
+				prog = 0
+	down = pygame.draw.rect(screen, GRAY,(1100,650,75,50))
+	if 1100+75 > mouse[0] > 1100 and 650+50 > mouse[1] > 650:#while mouse is within button perimitter
+			if event.type == pygame.MOUSEBUTTONUP and prog == 0:#when mouse button is released
+				print("down")
+				dirr = 1
+				player_one.move_player(dirr)#call move_player function on player and pass direction
+				prog = 1
+			if event.type == pygame.MOUSEBUTTONDOWN and prog == 1:
+				prog = 0
+	up = pygame.draw.rect(screen, GRAY,(1100,580,75,50))
+	if 1100+75 > mouse[0] > 1100 and 580+50 > mouse[1] > 580:#while mouse is within button perimitter
+			if event.type == pygame.MOUSEBUTTONUP and prog == 0:#when mouse button is released
+				print("up")
+				dirr = 2
+				player_one.move_player(dirr)#call move_player function on player and pass direction
+				prog = 1
+			if event.type == pygame.MOUSEBUTTONDOWN and prog == 1:
+				prog = 0
+	right = pygame.draw.rect(screen, GRAY,(1200,650,75,50))
+	if 1200+75 > mouse[0] > 1200 and 650+50 > mouse[1] > 650:#while mouse is within button perimitter
+			if event.type == pygame.MOUSEBUTTONUP and prog == 0:#when mouse button is released
+				print("right")
+				dirr = 3
+				player_one.move_player(dirr)#call move_player function on player and pass direction
+				prog = 1
+			if event.type == pygame.MOUSEBUTTONDOWN and prog == 1:
+				prog = 0
+#<<<<<<< Architectural-Spike
+
+	
+	
+	player_one.place_player(screen)#keep player updated on screen
+
+#=======
+#>>>>>>> Architectural-Spike
+
 	
 	player_one.place_player(screen)#keep player updated on screen
 	
