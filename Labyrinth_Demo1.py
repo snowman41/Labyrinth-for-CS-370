@@ -2,6 +2,7 @@
 #Labyrinth Demo
 
 from Labyrinth_Demo1_Functions import *
+import settings
 import Player_Class
 import pygame
 import sys
@@ -16,7 +17,7 @@ gridMargin = 5#Individual grid dimensions
 players = 1 #how many players
 p1 = "marty"#player name
 prog = 0#variable used to keep track of mouse clicks
-#>>>>>>> Architectural-Spike
+
 
 BLACK = (0,0,0)#Colors used in game
 GRAY = (120,120,120)
@@ -25,7 +26,6 @@ BACKGROUNDCOLOR = (0, 48, 146)
 numOfColumns = 7
 numOfRows = 7
 
-imagePaths = []
 imageLibrary = {}#Defines dictionary
 alreadyUsedCoords = []#Stores already Used Coordinates
 
@@ -42,6 +42,7 @@ for row in range(numOfRows):
 		grid[row].append(0)
 
 
+
 os.chdir("C:\LabyrinthDemo")#Grabs image files from directory
 for file in glob.glob("*.png"):
     imagePaths.append(file)
@@ -56,6 +57,7 @@ for file in glob.glob("*.png"):
 #>>>>>>> Architectural-Spike
 #Player_1 = Player_Class()
 
+
 pygame.init()#initializes pygame
 WINDOW_SIZE = [1280, 960]
 screen = pygame.display.set_mode(WINDOW_SIZE)#Sets the size of the screen
@@ -63,13 +65,8 @@ pygame.display.set_caption("Labyrinth")#Sets title of the screen
 gameOver = False#Loops until user closes out of game
 clock = pygame.time.Clock()#Manages how fast the screen updates
 
-#<<<<<<< Architectural-Spike
-#=======
+randomizeTiles()#randomizes tiles
 
-
-#getTileCoordinates(12)#Gets coordinates for selected tile
-
-#>>>>>>> Architectural-Spike
 while not gameOver:
 	for event in pygame.event.get():#Empties event queue
 		if event.type == pygame.QUIT:#Sent when User presses close button
@@ -80,23 +77,18 @@ while not gameOver:
 	for row in range(numOfRows):#Draws the grid		
 		for column in range(numOfColumns):			
 			pygame.draw.rect(screen, BLACK, [(gridMargin + singleGridWidth) * column + gridMargin + 250, (gridMargin + singleGridHeight) * row + gridMargin + 110, singleGridWidth, singleGridHeight])  
-#<<<<<<< Architectural-Spike
 
-#=======
-#>>>>>>> Architectural-Spike
 	if players >= 1: #player setup if statement, place to initialize player objects
 		player_one = Player_Class.Player_Guy(p1, screen)
 		player_one.place_player(screen)
 		players -= 1
-#<<<<<<< Architectural-Spike
 
 	mouse = pygame.mouse.get_pos()#initialize mouse pointer
-	#click = pygame.mouse.get_pressed()#initialize mouse clicker
+	#click = pygame.mouse.get_pressed()#initialize mouse clicker	
 
-	for x in range(49):#Filling board with tiles
-		screen.blit(getImage(imagePaths[x]), (getTileCoordinates(x + 1)))	
-#=======
-#>>>>>>> Architectural-Spike
+
+	placeTiles()#Places all tiles
+	
 
 	mouse = pygame.mouse.get_pos()#initialize mouse pointer
 	#click = pygame.mouse.get_pressed()#initialize mouse clicker
@@ -110,6 +102,7 @@ while not gameOver:
 	left = pygame.draw.polygon(screen, GRAY, ((1060, 590), (1085, 615), (1085, 605), (1110, 605), (1110, 575), (1085, 575), (1085, 565))) #Create Buttons For Movement and Handle mouse clicks
 	if 1060+50 > mouse[0] > 1060 and 565+50 > mouse[1] > 565:#while mouse is within button perimitter
 #=======
+
 
 	left = pygame.draw.rect(screen, GRAY,(1000,650,75,50))#Create Buttons For Movement and Handle mouse clicks
 	if 1000+75 > mouse[0] > 1000 and 650+50 > mouse[1] > 650:#while mouse is within button perimitter
@@ -148,14 +141,12 @@ while not gameOver:
 				prog = 1
 			if event.type == pygame.MOUSEBUTTONDOWN and prog == 1:
 				prog = 0
-#<<<<<<< Architectural-Spike
 
 	
 	
 	player_one.place_player(screen)#keep player updated on screen
 
-#=======
-#>>>>>>> Architectural-Spike
+
 
 
 	pygame.draw.polygon(screen, (0, 0, 0), ((140, 245), (140, 295), (190, 295), (190, 320), (240, 270), (190, 220), (190, 245))) #Row 2, Moving Left. Pos 1
@@ -280,6 +271,7 @@ while not gameOver:
 	
 	player_one.place_player(screen)#keep player updated on screen
 	
+  
 	clock.tick(60)#Sets to 60 frames per second
 
 	pygame.display.flip()
