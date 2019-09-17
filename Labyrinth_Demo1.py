@@ -97,16 +97,9 @@ while not gameOver:
 	screen.blit(getImage("LabyrinthTile7.png"), (885, 115))
 	screen.blit(getImage("LabyrinthTile43.png"), (255, 745))
 	screen.blit(getImage("LabyrinthTile49.png"), (885, 745))
-#<<<<<<< Architectural-Spike
-
-	left = pygame.draw.polygon(screen, GRAY, ((1060, 590), (1085, 615), (1085, 605), (1110, 605), (1110, 575), (1085, 575), (1085, 565))) #Create Buttons For Movement and Handle mouse clicks
-	if 1060+50 > mouse[0] > 1060 and 565+50 > mouse[1] > 565:#while mouse is within button perimitter
-#=======
-
 
 	left = pygame.draw.rect(screen, GRAY,(1000,650,75,50))#Create Buttons For Movement and Handle mouse clicks
 	if 1000+75 > mouse[0] > 1000 and 650+50 > mouse[1] > 650:#while mouse is within button perimitter
-#>>>>>>> Architectural-Spike
 			if event.type == pygame.MOUSEBUTTONUP and prog == 0:#when mouse button is released
 				print("left")
 				dirr = 0
