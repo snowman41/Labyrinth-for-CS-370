@@ -41,8 +41,6 @@ def main():
 
 		if game_state == GameState.GAME:
 			game_state = main_game(screen)
-			#Quit game for now until we connect the pieces
-			#pygame.quit()
 
 		if game_state == GameState.RULES:
 			game_state = rules_screen(screen)
