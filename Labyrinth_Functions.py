@@ -36,6 +36,80 @@ def get_tile_coordinates(col, row):#Function which takes in column and row and r
 			if pos == colRow:
 				return(coords)
 
+def grab_and_place_arrows(display):#Function which grabs images of arrows and puts them in positions around board
+	mouse = pygame.mouse.get_pos()#Stores position of mouse	
+
+	arrowDownIC = pygame.image.load("ArrowDownIC.png")
+	arrowDownAC = pygame.image.load("ArrowDownAC.png")
+	arrowUPIC = pygame.image.load("ArrowUPIC.png")
+	arrowUPAC = pygame.image.load("ArrowUPAC.png")
+	arrowLeftIC = pygame.image.load("ArrowLeftIC.png")
+	arrowLeftAC = pygame.image.load("ArrowLeftAC.png")
+	arrowRightIC = pygame.image.load("ArrowRightIC.png")
+	arrowRightAC = pygame.image.load("ArrowRightAC.png")
+
+
+	if 400 + 100 > mouse[0] > 400 and 0 + 100 > mouse[1] > 20:#If mouse hovers, then changes image
+		display.blit(arrowDownAC, (435, 70))
+	else:
+		display.blit(arrowDownIC, (435, 35))
+
+	if 600 + 100 > mouse[0] > 600 and 0 + 100 > mouse[1] > 20:
+		display.blit(arrowDownAC, (635, 70))
+	else:
+		display.blit(arrowDownIC, (635, 35))
+
+	if 800 + 100 > mouse[0] > 800 and 0 + 100 > mouse[1] > 20:
+		display.blit(arrowDownAC, (835, 70))
+	else:
+		display.blit(arrowDownIC, (835, 35))
+
+	if 400 + 100 > mouse[0] > 400 and 780 + 100 > mouse[1] > 800:
+		display.blit(arrowUPAC, (435, 800))
+	else:
+		display.blit(arrowUPIC, (435, 835))
+
+	if 600 + 100 > mouse[0] > 600 and 780 + 100 > mouse[1] > 800:
+		display.blit(arrowUPAC, (635, 800))
+	else:
+		display.blit(arrowUPIC, (635, 835))
+
+	if 800 + 100 > mouse[0] > 800 and 780 + 100 > mouse[1] > 800:
+		display.blit(arrowUPAC, (835, 800))
+	else:
+		display.blit(arrowUPIC, (835, 835))
+
+	if 200 + 100 > mouse[0] > 220 and 200 + 100 > mouse[1] > 200:
+		display.blit(arrowRightAC, (273, 235))
+	else:
+		display.blit(arrowRightIC, (238, 235))
+
+	if 200 + 100 > mouse[0] > 220 and 400 + 100 > mouse[1] > 400:
+		display.blit(arrowRightAC, (273, 435))
+	else:
+		display.blit(arrowRightIC, (238, 435))
+
+	if 200 + 100 > mouse[0] > 220 and 600 + 100 > mouse[1] > 600:
+		display.blit(arrowRightAC, (273, 635))
+	else:
+		display.blit(arrowRightIC, (238, 635))
+
+	if 980 + 100 > mouse[0] > 1000 and 200 + 100 > mouse[1] > 200:
+		display.blit(arrowLeftAC, (998, 235))
+	else:
+		display.blit(arrowLeftIC, (1033, 235))
+
+	if 980 + 100 > mouse[0] > 1000 and 400 + 100 > mouse[1] > 400:
+		display.blit(arrowLeftAC, (998, 435))
+	else:
+		display.blit(arrowLeftIC, (1033, 435))
+
+	if 980 + 100 > mouse[0] > 1000 and 600 + 100 > mouse[1] > 600:
+		display.blit(arrowLeftAC, (998, 635))
+	else:
+		display.blit(arrowLeftIC, (1033, 635))
+
+
 
 def grab_and_randomize_tiles():#Function which grabs tiles in specified directory and puts them in random positions in matrix
 	elbowTiles = []#Stores elbow tiles
