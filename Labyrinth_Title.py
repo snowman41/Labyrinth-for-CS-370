@@ -4,6 +4,7 @@ import os
 from enum import Enum
 from pygame.rect import Rect
 from Sprite import *
+from Labyrinth_Main import main_game
 
 
 #Global Colors used
@@ -39,9 +40,9 @@ def main():
 			game_state = title_screen(screen)
 
 		if game_state == GameState.GAME:
-			#game_state = play_game(screen)
+			game_state = main_game(screen)
 			#Quit game for now until we connect the pieces
-			pygame.quit()
+			#pygame.quit()
 
 		if game_state == GameState.RULES:
 			game_state = rules_screen(screen)
