@@ -8,7 +8,6 @@ import sys
 import os
 import glob
 import random
-import numpy as np
 
 pygame.init()#initializes pygame
 WINDOW_SIZE = [1280, 960]
@@ -30,10 +29,10 @@ ROW_COUNT = 7
 COLUMN_COUNT = 7
 SQUARESIZE = 100
 
-
-
 randomTilePositions = grab_and_randomize_tiles()#Stores positions of all un-fixed tiles in 7x7 matrix
 fixedTilePositions = grab_fixed_tiles()#Stores positions of all fixed tiles in 7x7 matrix
+
+
 
 while not gameOver:
 	for event in pygame.event.get():#Empties event queue
@@ -52,11 +51,8 @@ while not gameOver:
 	button(screen, "SHUFFLE!", GREEN, "GristledFont-Regular.ttf", 35, 50, 850, 150, 75, PURPLE, LIGHT_PURPLE)#Creates shuffle button
 	button(screen, "Quit", BLACK, "freesansbold.ttf", 25, 1205, 10, 65, 36, RED, LIGHT_RED)#Creates quit button
 
-	if 1205 + 65 > mouse[0] > 1205 and 10 + 36 > mouse[1] > 10:#Adds functionality to quit button
-		if click[0] == 1:
-			sys.exit()
-
 	grab_and_place_arrows(screen)#Places arrows around the board
+	grab_and_place_movement_keys(screen)#Places movement keys on board
 
 	for c in range(ROW_COUNT):#Fills game board with random and fixed tiles
 		for r in range(COLUMN_COUNT):
@@ -67,7 +63,13 @@ while not gameOver:
 				fixedTile = pygame.image.load(fixedTilePositions[c][r])
 				screen.blit(fixedTile, (get_tile_coordinates(c, r)))
 
+	if 1205 + 65 > mouse[0] > 1205 and 10 + 36 > mouse[1] > 10:#Adds functionality to quit button
+		if click[0] == 1:
+			sys.exit()
 
+	if 50 + 150 > mouse[0] > 50 and 850 + 75 > mouse[1] > 850:#Adds functionality to shuffle button
+		if click[0] == 1:
+			randomTilePositions = grab_and_randomize_tiles()
 
 	clock.tick(60)#Sets to 60 frames per second
 
