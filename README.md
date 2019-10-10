@@ -1,1 +1,0 @@
-# Labyrinth-for-CS-370
