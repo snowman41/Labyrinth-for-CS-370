@@ -6,7 +6,6 @@ import os
 import random
 from random import shuffle
 import glob
-import numpy as np
 
 def button(display, txt, txtColor, font, fontSize, x, y, w, h, ic, ac):#Function which creates button, (display: source of screen) (txt: what the button says) (txtColor: Color of text) (font: what font the text will be) (x, y: coordinates of button) (w, h: width and height of button) (ic, ac: inactive and active color)
 	mouse = pygame.mouse.get_pos()#Stores position of mouse
@@ -108,6 +107,47 @@ def grab_and_place_arrows(display):#Function which grabs images of arrows and pu
 		display.blit(arrowLeftAC, (998, 635))
 	else:
 		display.blit(arrowLeftIC, (1033, 635))
+
+def grab_and_place_movement_keys(display):#Function which grabs images of movement keys and places them in correct positions
+	mouse = pygame.mouse.get_pos()#Stores position of mouse	
+	click = pygame.mouse.get_pressed()
+
+	moveUpIC = pygame.image.load("moveUpIC.png")
+	moveRightIC = pygame.image.load("moveRightIC.png")
+	moveDownIC = pygame.image.load("moveDownIC.png")
+	moveLeftIC = pygame.image.load("moveLeftIC.png")
+	moveUpAC = pygame.image.load("moveUpAC.png")
+	moveRightAC = pygame.image.load("moveRightAC.png")
+	moveDownAC = pygame.image.load("moveDownAC.png")
+	moveLeftAC = pygame.image.load("moveLeftAC.png")	
+
+	if 1110 + 45 > mouse[0] > 1125 and 800 + 60 > mouse[1] > 800:#If mouse clicks, then changes image
+		display.blit(moveUpIC, (1110, 800))
+		if click[0] == 1:
+			display.blit(moveUpAC, (1110, 800))
+	else:
+		display.blit(moveUpIC, (1110, 800))
+
+	if 1110 + 45 > mouse[0] > 1125 and 870 + 60 > mouse[1] > 870:
+		display.blit(moveDownIC, (1110, 870))
+		if click[0] == 1:
+			display.blit(moveDownAC, (1110, 870))
+	else:
+		display.blit(moveDownIC, (1110, 870))
+
+	if 1160 + 45 > mouse[0] > 1160 and 825 + 60 > mouse[1] > 845:
+		display.blit(moveRightIC, (1160, 835))
+		if click[0] == 1:
+			display.blit(moveRightAC, (1160, 835))
+	else:
+		display.blit(moveRightIC, (1160, 835))
+
+	if 1060 + 45 > mouse[0] > 1060 and 825 + 60 > mouse[1] > 845:
+		display.blit(moveLeftIC, (1060, 835))
+		if click[0] == 1:
+			display.blit(moveLeftAC, (1060, 835))
+	else:
+		display.blit(moveLeftIC, (1060, 835))
 
 
 
