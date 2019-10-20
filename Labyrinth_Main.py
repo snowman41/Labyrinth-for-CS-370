@@ -58,8 +58,8 @@ def main_game(screen):
     	button(screen, "SHUFFLE!", GREEN, "GristledFont-Regular.ttf", 35, 50, 850, 150, 75, PURPLE, LIGHT_PURPLE)#Creates shuffle button
     	button(screen, "Quit", BLACK, "freesansbold.ttf", 25, 1205, 10, 65, 36, RED, LIGHT_RED)#Creates quit button
     
-    	#grab_and_place_arrows(screen)#Places arrows around the board
-    	#grab_and_place_movement_keys(screen)#Places movement keys on board
+    	grab_and_place_arrows(screen)#Places arrows around the board
+    	grab_and_place_movement_keys(screen)#Places movement keys on board
     
     	for c in range(ROW_COUNT):#Fills game board with random and fixed tiles
     		for r in range(COLUMN_COUNT):
