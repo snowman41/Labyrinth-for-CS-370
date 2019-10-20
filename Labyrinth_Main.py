@@ -31,6 +31,8 @@ def main_game(screen):
     ROW_COUNT = 7
     COLUMN_COUNT = 7
     SQUARESIZE = 100
+
+    TILE_ARRAY = numpy.ndarray(shape=(7,7), dtype=object)
     
     randomTilePositions = grab_and_randomize_tiles()#Stores positions of all un-fixed tiles in 7x7 matrix
     fixedTilePositions = grab_fixed_tiles()#Stores positions of all fixed tiles in 7x7 matrix

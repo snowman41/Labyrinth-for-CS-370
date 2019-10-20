@@ -6,6 +6,7 @@ import os
 import random
 from random import shuffle
 import glob
+from Tile import *
 
 def button(display, txt, txtColor, font, fontSize, x, y, w, h, ic, ac):#Function which creates button, (display: source of screen) (txt: what the button says) (txtColor: Color of text) (font: what font the text will be) (x, y: coordinates of button) (w, h: width and height of button) (ic, ac: inactive and active color)
 	mouse = pygame.mouse.get_pos()#Stores position of mouse
@@ -217,21 +218,90 @@ def grab_fixed_tiles():#Function which grabs tiles in specified directory and pu
 
 	return twoDimBoard
 
+def get_image_filepath(tile):#Takes Tile clas instance
+        tile.image = ("%%%%.png" (tile.North, tile.East, tile.South, tile.West))#Make sure this matches the naming convention for tiles
 
+def rotate_tile_clockwise(tile):
+        tilevalue = tile.north
+        tile.north = tile.west
+        tile.west = tile.south
+        tile.south = tile.east
+        tile.east = tilevalue
 
-		
-
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
+def new_tile_initialization():
+        t0 = Tile(0,1,1,0)#initialize and place all of the tiles that dont move
+        TILE_ARRAY[0,0]=t0
+        t1 = Tile(0,1,1,1)
+        TILE_ARRAY[0,2]=t1
+        t2 = Tile(0,1,1,1)
+        TILE_ARRAY[0,4]=t2
+        t3 = Tile(0,0,1,1)
+        TILE_ARRAY[0,6]=t3
+        t4 = Tile(1,1,1,0)
+        TILE_ARRAY[2,0]=t4
+        t5 = Tile(1,1,1,0)
+        TILE_ARRAY[2,2]=t5
+        t6 = Tile(0,1,1,1)
+        TILE_ARRAY[2,4]=t6
+        t7 = Tile(1,0,1,1)
+        TILE_ARRAY[2,6]=t7
+        t8 = Tile(1,1,1,0)
+        TILE_ARRAY[4,0]=t8
+        t9 = Tile(1,1,0,1)
+        TILE_ARRAY[4,2]=t9
+        t10 = Tile(1,0,1,1)
+        TILE_ARRAY[4,4]=t10
+        t11 = Tile(1,0,1,1)
+        TILE_ARRAY[4,6]=t11
+        t12 = Tile(1,1,0,0)
+        TILE_ARRAY[6,0]=t12
+        t13 = Tile(1,1,0,1)
+        TILE_ARRAY[6,2]=t13
+        t14 = Tile(1,1,0,1)
+        TILE_ARRAY[6,4]=t14
+        t15 = Tile(1,0,0,1)
+        TILE_ARRAY[6,6]=t15
+        t16 = Tile(1,0,1,0)#Straight tiles
+        t17 = Tile(1,0,1,0)
+        t18 = Tile(1,0,1,0)
+        t19 = Tile(1,0,1,0)
+        t20 = Tile(1,0,1,0)
+        t21 = Tile(1,0,1,0)
+        t22 = Tile(1,0,1,0)
+        t23 = Tile(1,0,1,0)
+        t24 = Tile(1,0,1,0)
+        t25 = Tile(1,0,1,0)
+        t26 = Tile(1,0,1,0)
+        t27 = Tile(1,0,1,0)
+        t28 = Tile(1,0,1,0)
+        t29 = Tile(1,1,0,0)#Elbow tiles
+        t30 = Tile(1,1,0,0)
+        t31 = Tile(1,1,0,0)
+        t32 = Tile(1,1,0,0)
+        t33 = Tile(1,1,0,0)
+        t34 = Tile(1,1,0,0)
+        t35 = Tile(1,1,0,0)
+        t36 = Tile(1,1,0,0)
+        t37 = Tile(1,1,0,0)
+        t40 = Tile(1,1,0,0)
+        t41 = Tile(1,1,0,0)
+        t42 = Tile(1,1,0,0)
+        t43 = Tile(1,1,0,0)
+        t44 = Tile(1,1,0,0)
+        t45 = Tile(1,1,0,0)
+        t47 = Tile(1,1,1,0)#T tiles
+        t48 = Tile(1,1,1,0)
+        t49 = Tile(1,1,1,0)
+        t50 = Tile(1,1,1,0)
+        t51 = Tile(1,1,1,0)
+        t52 = Tile(1,1,1,0)
+        initializationList = [t16,t17,t18,t19,t20,t21,t22,t23,t24,t25,t26,t27,t28,t29,t30,t31,t32,t33,t34,t35,t36,t37,t38,t39,t4,t41,t42,t43,t44,t45,t46,t47,t48,t49,t50,t51,t52]
+        for a in initializationList:
+                for b in range(random.randint(0,3)):
+                                rotate_tile_clockwise(a)
+        random.shuffle(initializationList)
+        for column in 6:
+                for row in 6:
+                        if TILE_ARRAY[row][column] != 0:#This is testing if TILE_ARRAY[row][column] is empty, may have to change logic to work
+                                        TILE_ARRAY[row][column] = initializationList[0]
+                                        del initializationList[0]
