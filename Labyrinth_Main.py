@@ -3,7 +3,11 @@
 
 
 from Labyrinth_Functions import *
+
 from Tile import *
+
+#import Labyrinth_Player_Class
+
 import pygame
 import sys
 import os

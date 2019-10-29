@@ -243,6 +243,7 @@ def grab_fixed_tiles():#Function which grabs tiles in specified directory and pu
 
 	return twoDimBoard
 
+
 def get_image_filepath(tile):#Takes Tile class instance
 	STARTING01 = pygame.image.load(os.path.join('..\LabyrinthProject', 'Starting01.png')).convert_alpha()#Gets the image path for tile
 	NORTHEAST = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthEast.png')).convert_alpha()

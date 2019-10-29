@@ -132,6 +132,12 @@ def rules_screen(screen):
 		action= GameState.TITLE,
 		)
 
+		#Set background color
+		screen.fill(BLACK)
+
+		rules_image = pygame.image.load(r'Rules.png')
+		screen.blit(rules_image, (196, 115))
+
 		mouse_up = False
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -140,8 +146,7 @@ def rules_screen(screen):
 				pygame.quit()
 				sys.exit()
 
-		#Set background color
-		screen.fill(BLACK)
+		
 
 		ui_action = return_btn.update(pygame.mouse.get_pos(), mouse_up)
 		if ui_action is not None:
