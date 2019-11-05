@@ -3,6 +3,7 @@ import os
 import pygame
 
 
+
 class Tile:#create class for tiles characteristics
 	def __init__(self, north, east, south, west, row, column):
 		self.north = north#A property to indicate whether the tile is open on a given side, 0 = closed, 1 = open
@@ -14,6 +15,7 @@ class Tile:#create class for tiles characteristics
 		self.currentrow = row
 		self.currentcolumn = column
 		self.image = ""
+
 
 
 	def get_image_filepath(self):#Takes Tile class instance
@@ -61,3 +63,4 @@ class Tile:#create class for tiles characteristics
 	def draw(self, screen, pos):#Blits image onto screen
 		if self.image != "":
 			screen.blit(self.image, pos)
+
