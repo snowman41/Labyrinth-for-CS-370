@@ -6,8 +6,6 @@ from Labyrinth_Functions import *
 
 from Tile import *
 
-#import Labyrinth_Player_Class
-
 import pygame
 import sys
 import os
@@ -37,10 +35,9 @@ SQUARESIZE = 100
 
 allImageFilesPaths = []
 
-randomTilePositions = grab_and_randomize_tiles()#Stores positions of all un-fixed tiles in 7x7 matrix
-fixedTilePositions = grab_fixed_tiles()#Stores positions of all fixed tiles in 7x7 matrix
-
 allTiles = new_tile_initialization()
+
+print(get_tile_coordinates(2,0))
 
 while not gameOver:
 	for event in pygame.event.get():#Empties event queue
@@ -62,9 +59,11 @@ while not gameOver:
 	grab_and_place_arrows(screen)#Places arrows around the board
 	grab_and_place_movement_keys(screen)#Places movement keys on board
 
-	#for c in range(ROW_COUNT):#Fills game board with random and fixed tiles
-		#for r in range(COLUMN_COUNT):
-			#allTiles[r][c].draw()
+	for c in range(ROW_COUNT):#Fills game board with random and fixed tiles
+		for r in range(COLUMN_COUNT):
+			#allTiles[r][c].get_image_filepath()
+			allTiles[r][c].get_image_filepath()
+			allTiles[r][c].draw(screen, (get_tile_coordinates(c, r)))
 			#if randomTilePositions[r][c] != 0:
 				#randomTile = pygame.image.load(randomTilePositions[r][c])
 				#screen.blit(randomTile, (get_tile_coordinates(r, c)))
