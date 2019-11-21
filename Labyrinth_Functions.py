@@ -254,6 +254,7 @@ def new_tile_initialization(TILE_ARRAY):
 	#print(TILE_ARRAY)#shows contents of tile_array
 	return TILE_ARRAY
 
+
 def find_path(tile, Array):
 
 	tile.travelable = 1
@@ -295,7 +296,6 @@ def find_path(tile, Array):
 		find_path(WTile, Array)
 
 
-
 def color_untravelable_path(Array, display):
 	for x in range(7):
 		for y in range(7):
@@ -304,11 +304,7 @@ def color_untravelable_path(Array, display):
 				display.blit(Array[x][y].image, (get_tile_coordinates(y, x)))
 
 
-#TILE_ARRAY[r][c].get_image_filepath()
-	#TILE_ARRAY[r][c].draw(screen, (get_tile_coordinates(c, r)))
-
-
-def move_player(tile, Array, display):
+def move_player(tile, Array, display, PlayerPos):
 	if tile.travelable is 1:
 		for x in range(7):
 			for y in range(7):
@@ -316,6 +312,7 @@ def move_player(tile, Array, display):
 				Array[y][x].draw(display, (get_tile_coordinates(x, y)))
 				Array[y][x].travelable = 0
 				Array[y][x].p1 = 0
-		display.blit(pygame.image.load(r'LabyrinthPlayerOneT.png'), (get_tile_coordinates(tile.currentrow, tile.currentcolumn)))
-		tile.travelable = 1
+		display.blit(pygame.image.load(r'LabyrinthPlayerOneT.png'), (get_tile_coordinates(tile.currentcolumn, tile.currentrow)))
 		tile.p1 = 1
+		PlayerPos = tile
+		print("Player moved to", tile.currentcolumn, tile.currentrow)

@@ -38,8 +38,7 @@ allImageFilesPaths = []
 TILE_ARRAY = numpy.ndarray(shape=(7,7), dtype=object)
 new_tile_initialization(TILE_ARRAY)
 
-Player1Image = pygame.image.load(r'LabyrinthPlayerOneT.png')
-screen.blit(Player1Image, (get_tile_coordinates(0, 0)))
+Player = TILE_ARRAY[3][3] #Placeholder for player class
 
 print(get_tile_coordinates(2,0))
 def main_game(display):
@@ -49,8 +48,6 @@ def main_game(display):
 	for c in range(ROW_COUNT):#creates gameboard
 		for r in range(COLUMN_COUNT):
 			pygame.draw.rect(screen, BLACK, (r*SQUARESIZE+(SQUARESIZE*3), c*SQUARESIZE+SQUARESIZE, SQUARESIZE, SQUARESIZE))
-	click = pygame.mouse.get_pressed()#Stores '1' if click occurs
-	mouse = pygame.mouse.get_pos()#Stores position of mouse
 
 	
 	button(screen, "Quit", BLACK, "freesansbold.ttf", 25, 1205, 10, 65, 36, RED, LIGHT_RED)#Creates quit button
@@ -69,12 +66,16 @@ def main_game(display):
 		#elif randomTilePositions[r][c] == 0:
 			#fixedTile = pygame.image.load(fixedTilePositions[r][c])
 			#screen.blit(fixedTile, (get_tile_coordinates(r, c)))
+
 	PathFound = 0
 
 	while not gameOver:
 		for event in pygame.event.get():#Empties event queue
 			if event.type == pygame.QUIT:#Sent when User presses close button
 				sys.exit()		
+
+		click = pygame.mouse.get_pressed()#Stores '1' if click occurs
+		mouse = pygame.mouse.get_pos()#Stores position of mouse
 
 		if 1205 + 65 > mouse[0] > 1205 and 10 + 36 > mouse[1] > 10:#Adds functionality to quit button
 			if click[0] == 1:
@@ -85,15 +86,15 @@ def main_game(display):
 		#	if click[0] == 1:
 		
 		if PathFound is 0: #Check to see if pathfinding function has run
-			find_path(TILE_ARRAY[3][3], TILE_ARRAY)
-			PathFound = 1
+			find_path(Player, TILE_ARRAY)
 			color_untravelable_path(TILE_ARRAY, screen)
+			PathFound = 1
 
 		for z in range(ROW_COUNT): #Check if player is clicking on a tile
 			for j in range(COLUMN_COUNT):
-				if ((z)*100+(100*3)) + 100 > mouse[0] > ((z)*100+(100*3)) and ((j)*100+100) + 100 > mouse[1] > ((j)*100+100):
-					if click[0] == 1: 
-						move_player(TILE_ARRAY[z][j], TILE_ARRAY, screen) #Move the player to the tile they clicked if it is travelable
+				if ((j*100+(100*3)) + 100) > mouse[0] > (j*100+(100*3)) and ((z*100+100) + 100) > mouse[1] > (z*100+100):
+					if click[0] == 1:
+						move_player(TILE_ARRAY[z][j], TILE_ARRAY, screen, Player) #Move the player to the tile they clicked if it is travelable
 						PathFound = 0
 
 		#button(screen, "SHUFFLE!", GREEN, "GristledFont-Regular.ttf", 35, 50, 850, 150, 75, PURPLE, LIGHT_PURPLE)#Creates shuffle button
