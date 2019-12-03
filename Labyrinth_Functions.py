@@ -164,11 +164,13 @@ def rotate_tile_clockwise(tile):
 	tile.south = tile.east
 	tile.east = tilevalue
 
+
 def new_tile_initialization(TILE_ARRAY):
 	#TILE_ARRAY = allFilePaths
 	#TILE_ARRAY = [[0 for x in range(7)] for x in range(7)]#Creates matrix to store tiles
 	#get_tile_coordinates(0, 0),STARTING01,
 	
+
 	t0 = Tile(0,1,1,0,0,0)#initialize and place all of the tiles that dont move
 	TILE_ARRAY[0,0]=t0
 	t1 = Tile(0,1,1,1,0,2)
@@ -252,6 +254,7 @@ def new_tile_initialization(TILE_ARRAY):
 				del initializationList[0]
 
 	#print(TILE_ARRAY)#shows contents of tile_array
+
 	return TILE_ARRAY
 
 
@@ -316,3 +319,4 @@ def move_player(tile, Array, display, PlayerPos):
 		tile.p1 = 1
 		PlayerPos = tile
 		print("Player moved to", tile.currentcolumn, tile.currentrow)
+

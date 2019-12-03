@@ -35,6 +35,7 @@ SQUARESIZE = 100
 
 allImageFilesPaths = []
 
+
 TILE_ARRAY = numpy.ndarray(shape=(7,7), dtype=object)
 new_tile_initialization(TILE_ARRAY)
 
@@ -74,6 +75,7 @@ def main_game(display):
 			if event.type == pygame.QUIT:#Sent when User presses close button
 				sys.exit()		
 
+
 		click = pygame.mouse.get_pressed()#Stores '1' if click occurs
 		mouse = pygame.mouse.get_pos()#Stores position of mouse
 
@@ -101,6 +103,7 @@ def main_game(display):
 		#if 50 + 150 > mouse[0] > 50 and 850 + 75 > mouse[1] > 850:#Adds functionality to shuffle button
 			#if click[0] == 1:
 				#randomTilePositions = grab_and_randomize_tiles()
+
 
 		clock.tick(60)#Sets to 60 frames per second
 
