@@ -164,11 +164,13 @@ def rotate_tile_clockwise(tile):
 	tile.south = tile.east
 	tile.east = tilevalue
 
-def new_tile_initialization():
+
+def new_tile_initialization(TILE_ARRAY):
 	#TILE_ARRAY = allFilePaths
 	#TILE_ARRAY = [[0 for x in range(7)] for x in range(7)]#Creates matrix to store tiles
 	#get_tile_coordinates(0, 0),STARTING01,
-	TILE_ARRAY = numpy.ndarray(shape=(7,7), dtype=object)
+	
+
 	t0 = Tile(0,1,1,0,0,0)#initialize and place all of the tiles that dont move
 	TILE_ARRAY[0,0]=t0
 	t1 = Tile(0,1,1,1,0,2)
@@ -252,4 +254,69 @@ def new_tile_initialization():
 				del initializationList[0]
 
 	#print(TILE_ARRAY)#shows contents of tile_array
+
 	return TILE_ARRAY
+
+
+def find_path(tile, Array):
+
+	tile.travelable = 1
+
+	if tile.currentrow <=0:
+		NTile = None
+	else:
+		NTile = Array[((tile.currentrow)-1)][(tile.currentcolumn)]
+
+	if tile.currentrow >=6:
+		STile = None
+	else:
+		STile = Array[((tile.currentrow)+1)][(tile.currentcolumn)]
+
+	if tile.currentcolumn >=6:
+		ETile = None
+	else:
+		ETile = Array[(tile.currentrow)][((tile.currentcolumn)+1)]
+
+	if tile.currentcolumn <=0:
+		WTile = None
+	else:
+		WTile = Array[(tile.currentrow)][((tile.currentcolumn)-1)]
+
+	if tile.north is 1 and NTile is not None and NTile.south is 1 and NTile.travelable is 0:
+		#print("Tile Travelable South to North from", tile.currentrow, tile.currentcolumn, "to", NTile.currentrow, NTile.currentcolumn)
+		find_path(NTile, Array)
+
+	if tile.east is 1 and ETile is not None and ETile.west is 1 and ETile.travelable is 0:
+		#print("Tile Travelable West to East", tile.currentrow, tile.currentcolumn, "to", ETile.currentrow, ETile.currentcolumn)
+		find_path(ETile, Array)
+
+	if tile.south is 1 and STile is not None and STile.north is 1 and STile.travelable is 0:
+		#print("Tile Travelable North to South", tile.currentrow, tile.currentcolumn, "to", STile.currentrow, STile.currentcolumn)
+		find_path(STile, Array)
+
+	if tile.west is 1 and WTile is not None and WTile.east is 1 and WTile.travelable is 0:
+		#print("Tile Travelable East to West", tile.currentrow, tile.currentcolumn, "to", WTile.currentrow, WTile.currentcolumn)
+		find_path(WTile, Array)
+
+
+def color_untravelable_path(Array, display):
+	for x in range(7):
+		for y in range(7):
+			if Array[x][y].travelable is 0:
+				Array[x][y].image.fill((150, 0, 0, 255), special_flags=pygame.BLEND_RGB_MULT) #Color unmoveable path red
+				display.blit(Array[x][y].image, (get_tile_coordinates(y, x)))
+
+
+def move_player(tile, Array, display, PlayerPos):
+	if tile.travelable is 1:
+		for x in range(7):
+			for y in range(7):
+				Array[y][x].get_image_filepath()
+				Array[y][x].draw(display, (get_tile_coordinates(x, y)))
+				Array[y][x].travelable = 0
+				Array[y][x].p1 = 0
+		display.blit(pygame.image.load(r'LabyrinthPlayerOneT.png'), (get_tile_coordinates(tile.currentcolumn, tile.currentrow)))
+		tile.p1 = 1
+		PlayerPos = tile
+		print("Player moved to", tile.currentcolumn, tile.currentrow)
+
