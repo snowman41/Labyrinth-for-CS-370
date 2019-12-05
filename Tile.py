@@ -1,5 +1,7 @@
 import sys
 import os
+import pygame
+
 
 
 class Tile:#create class for tiles characteristics
@@ -9,26 +11,59 @@ class Tile:#create class for tiles characteristics
 		self.south = south
 		self.west = west
 		#A property to store whether the tile has a treasure, when we implement separate treasures we can have this store the specific treasure name/number
-		self.p1 = 0#Stores whether player1 is on the tile, we can add additional properties when we start dealing with multiple players
+
+		self.p1 = 0 #Stores whether player1 is on the tile, we can add additional properties when we start dealing with multiple players
 		self.currentrow = row
 		self.currentcolumn = column
 		self.image = ""
+		self.travelable = 0 #A property to tell whether or not the tile is travelable to
+
+
+
+
 	def get_image_filepath(self):#Takes Tile class instance
-		if self.North == 1:
+		if self.north == 1:
 			FilenameNorth = "North"
 		else:
-			FienameNorth = ""
-		if self.East == 1:
+			FilenameNorth = ""
+		if self.east == 1:
 			FilenameEast = "East"
 		else:
 			FilenameEast = ""
-		if self.South == 1:
+		if self.south == 1:
 			FilenameSouth = "South"
 		else:
 			FilenameSouth = ""
-		if self.West == 1:
+		if self.west == 1:
 			FilenameWest = "West"
 		else:
 			FilenameWest = ""
-		self.image = ("%%%%.png" (FilenameNorth, FilenameEast, FilenameSouth, FilenameWest))#Make sure this matches the naming convention for tiles
-		
+
+		#print(FilenameNorth)
+
+		if FilenameNorth == "North" and FilenameEast == "East" and FilenameSouth == "" and FilenameWest == "":#Decides what image is set to depending on tile object
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthEast.png')).convert_alpha()
+		elif FilenameNorth == "North" and FilenameEast == "" and FilenameSouth == "" and FilenameWest == "West":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthWest.png')).convert_alpha()
+		elif FilenameNorth == "" and FilenameEast == "East" and FilenameSouth == "South" and FilenameWest == "":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'EastSouth.png')).convert_alpha()
+		elif FilenameNorth == "" and FilenameEast == "" and FilenameSouth == "South" and FilenameWest == "West":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'SouthWest.png')).convert_alpha()
+		elif FilenameNorth == "North" and FilenameEast == "" and FilenameSouth == "South" and FilenameWest == "":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthSouth.png')).convert_alpha()
+		elif FilenameNorth == "" and FilenameEast == "East" and FilenameSouth == "" and FilenameWest == "West":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'EastWest.png')).convert_alpha()
+		elif FilenameNorth == "North" and FilenameEast == "East" and FilenameSouth == "South" and FilenameWest == "":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthEastSouth.png')).convert_alpha()
+		elif FilenameNorth == "North" and FilenameEast == "East" and FilenameSouth == "" and FilenameWest == "West":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthEastWest.png')).convert_alpha()
+		elif FilenameNorth == "North" and FilenameEast == "" and FilenameSouth == "South" and FilenameWest == "West":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthSouthWest.png')).convert_alpha()
+		elif FilenameNorth == "" and FilenameEast == "East" and FilenameSouth == "South" and FilenameWest == "West":
+			self.image = pygame.image.load(os.path.join('..\LabyrinthProject', 'EastSouthWest.png')).convert_alpha()
+
+		#self.image = (tileimage (FilenameNorth, FilenameEast, FilenameSouth, FilenameWest))#Make sure this matches the naming convention for tiles
+	def draw(self, screen, pos):#Blits image onto screen
+		if self.image != "":
+			screen.blit(self.image, pos)
+

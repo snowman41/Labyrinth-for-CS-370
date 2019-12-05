@@ -1,3 +1,4 @@
+
 #Functions
 
 import pygame
@@ -152,110 +153,7 @@ def grab_and_place_movement_keys(display):#Function which grabs images of moveme
 	else:
 		display.blit(moveLeftIC, (1060, 835))
 
-
-
-def grab_and_randomize_tiles():#Function which grabs tiles in specified directory and puts them in random positions in matrix
-	elbowTiles = []#Stores elbow tiles
-	straightTiles = []#Stores straight tiles 
-	tTiles = []#Stores T Tiles
-	randomImagePaths = []#Stores random rotated image paths
-
-	#elbowFiles = ("NorthEast*", "NorthWest*", "*EastSouth*", "SouthWest*")
-	#straightFiles = ("NorthSouth*", "EastWest*")
-	#TFiles = ("NorthEastSouth*", "NorthEastWest*", "NorthSouthWest*", "EastSouthWest*")
-
-	twoDimBoard = [[0 for x in range(7)] for x in range(7)]#Creates matrix to store tiles in random positions
-
-	os.chdir("..\LabyrinthProject")#Grabs image files that are from directory
-
-	#for files in elbowFiles:
-		#elbowTiles.extend(glob.glob(files))
-	#for files in straightFiles:
-		#straightTiles.extend(glob.glob(files))
-	#for files in TFiles:
-		#tTiles.extend(glob.glob(files))
-	for file in glob.glob("NorthEast.png"):
-		elbowTiles.append(file)
-	for file in glob.glob("NorthWest*"):
-		elbowTiles.append(file)
-	for file in glob.glob("EastSouth.png"):
-		elbowTiles.append(file)
-	for file in glob.glob("SouthWest*"):
-		elbowTiles.append(file)
-	for file in glob.glob("NorthSouth.png"):
-		straightTiles.append(file)
-	for file in glob.glob("EastWest*"):
-		straightTiles.append(file)
-	for file in glob.glob("NorthEastSouth*"):
-		tTiles.append(file)
-	for file in glob.glob("NorthEastWest*"):
-		tTiles.append(file)
-	for file in glob.glob("NorthSouthWest*"):
-		tTiles.append(file)
-	for file in glob.glob("EastSouthWest*"):
-		tTiles.append(file)
-	for x in range(15):#Number of unfixed elbow tiles
-		randomImagePaths.append(random.choice(elbowTiles))
-	for x in range(13):#Number of unfixed elbow tiles
-		randomImagePaths.append(random.choice(straightTiles)) 
-	for x in range(6):#Number of unfixed elbow tiles
-		randomImagePaths.append(random.choice(tTiles))
-
-	for r in range(7):
-		for c in range(7):
-			currPos = tuple([r, c])
-			if currPos == (0, 1) or currPos == (0, 3) or currPos == (0, 5) or currPos == (1, 0) or currPos == (1, 1) or currPos == (1, 2) or currPos == (1, 3) or currPos == (1, 4) or currPos == (1, 5) or currPos == (1, 6) or currPos == (2, 1) or currPos == (2, 3) or currPos == (2, 5) or currPos == (3, 0) or currPos == (3, 1) or currPos == (3, 2) or currPos == (3, 3) or currPos == (3, 4) or currPos == (3, 5) or currPos == (3, 6) or currPos == (4, 1) or currPos == (4, 3) or currPos == (4, 5) or currPos == (5, 0) or currPos == (5, 1) or currPos == (5, 2) or currPos == (5, 3) or currPos == (5, 4) or currPos == (5, 5) or currPos == (5, 6) or currPos == (6, 1) or currPos == (6, 3) or currPos == (6, 5):#checks if current position is for non fixed tiles
-				imagePath = random.choice(randomImagePaths)
-				twoDimBoard[r][c] = imagePath
-				randomImagePaths.remove(imagePath)
-
-	return twoDimBoard
-
-def grab_fixed_tiles():#Function which grabs tiles in specified directory and puts them in fixed positions in matrix
-	twoDimBoard = [[0 for x in range(7)] for x in range(7)]#Creates matrix to store tiles in fixed positions
-
-	os.chdir("..\LabyrinthProject")#Grabs image files that are from directory
-
-	for file in glob.glob("Starting*"):
-		twoDimBoard[0][0] = file#Matrix goes by row first and column second
-	for file in glob.glob("SouthWest*"):
-		twoDimBoard[6][0] = file
-	for file in glob.glob("NorthWest*"):
-		twoDimBoard[6][6] = file
-	for file in glob.glob("NorthEast.png"):
-		twoDimBoard[0][6] = file
-	for file in glob.glob("EastSouthWest*"):
-		twoDimBoard[2][0] = file
-		twoDimBoard[4][0] = file
-		twoDimBoard[4][2] = file
-	for file in glob.glob("NorthEastSouth*"):
-		twoDimBoard[0][2] = file
-		twoDimBoard[2][2] = file
-		twoDimBoard[0][4] = file
-	for file in glob.glob("NorthSouthWest*"):
-		twoDimBoard[6][2] = file
-		twoDimBoard[4][4] = file
-		twoDimBoard[6][4] = file
-	for file in glob.glob("NorthEastWest*"):
-		twoDimBoard[2][4] = file
-		twoDimBoard[2][6] = file
-		twoDimBoard[4][6] = file
-
-	return twoDimBoard
-
-
 def get_image_filepath(tile):#Takes Tile class instance
-	STARTING01 = pygame.image.load(os.path.join('..\LabyrinthProject', 'Starting01.png')).convert_alpha()#Gets the image path for tile
-	NORTHEAST = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthEast.png')).convert_alpha()
-	NORTHWEST = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthWest.png')).convert_alpha()
-	EASTSOUTH = pygame.image.load(os.path.join('..\LabyrinthProject', 'EastSouth.png')).convert_alpha()
-	SOUTHWEST = pygame.image.load(os.path.join('..\LabyrinthProject', 'SouthWest.png')).convert_alpha()
-	NORTHSOUTH = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthSouth.png')).convert_alpha()
-	EASTWEST = pygame.image.load(os.path.join('..\LabyrinthProject', 'EastWest.png')).convert_alpha()
-	NORTHEASTSOUTH = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthEastSouth.png')).convert_alpha()
-	NORTHEASTWEST = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthEastWest.png')).convert_alpha()
-	NORTHSOUTHWEST = pygame.image.load(os.path.join('..\LabyrinthProject', 'NorthSouthWest.png')).convert_alpha()
-	EASTSOUTHWEST = pygame.image.load(os.path.join('..\LabyrinthProject', 'EastSouthWest.png')).convert_alpha()
 
 	tile.image = ("%%%%.png" (tile.North, tile.East, tile.South, tile.West))#Make sure this matches the naming convention for tiles
 
@@ -266,11 +164,13 @@ def rotate_tile_clockwise(tile):
 	tile.south = tile.east
 	tile.east = tilevalue
 
-def new_tile_initialization():
+
+def new_tile_initialization(TILE_ARRAY):
 	#TILE_ARRAY = allFilePaths
 	#TILE_ARRAY = [[0 for x in range(7)] for x in range(7)]#Creates matrix to store tiles
 	#get_tile_coordinates(0, 0),STARTING01,
-	TILE_ARRAY = numpy.ndarray(shape=(7,7), dtype=object)
+	
+
 	t0 = Tile(0,1,1,0,0,0)#initialize and place all of the tiles that dont move
 	TILE_ARRAY[0,0]=t0
 	t1 = Tile(0,1,1,1,0,2)
@@ -353,5 +253,70 @@ def new_tile_initialization():
 				TILE_ARRAY[row][column].currentcolumn = column
 				del initializationList[0]
 
-	print(TILE_ARRAY)#shows contents of tile_array
+	#print(TILE_ARRAY)#shows contents of tile_array
+
 	return TILE_ARRAY
+
+
+def find_path(tile, Array):
+
+	tile.travelable = 1
+
+	if tile.currentrow <=0:
+		NTile = None
+	else:
+		NTile = Array[((tile.currentrow)-1)][(tile.currentcolumn)]
+
+	if tile.currentrow >=6:
+		STile = None
+	else:
+		STile = Array[((tile.currentrow)+1)][(tile.currentcolumn)]
+
+	if tile.currentcolumn >=6:
+		ETile = None
+	else:
+		ETile = Array[(tile.currentrow)][((tile.currentcolumn)+1)]
+
+	if tile.currentcolumn <=0:
+		WTile = None
+	else:
+		WTile = Array[(tile.currentrow)][((tile.currentcolumn)-1)]
+
+	if tile.north is 1 and NTile is not None and NTile.south is 1 and NTile.travelable is 0:
+		#print("Tile Travelable South to North from", tile.currentrow, tile.currentcolumn, "to", NTile.currentrow, NTile.currentcolumn)
+		find_path(NTile, Array)
+
+	if tile.east is 1 and ETile is not None and ETile.west is 1 and ETile.travelable is 0:
+		#print("Tile Travelable West to East", tile.currentrow, tile.currentcolumn, "to", ETile.currentrow, ETile.currentcolumn)
+		find_path(ETile, Array)
+
+	if tile.south is 1 and STile is not None and STile.north is 1 and STile.travelable is 0:
+		#print("Tile Travelable North to South", tile.currentrow, tile.currentcolumn, "to", STile.currentrow, STile.currentcolumn)
+		find_path(STile, Array)
+
+	if tile.west is 1 and WTile is not None and WTile.east is 1 and WTile.travelable is 0:
+		#print("Tile Travelable East to West", tile.currentrow, tile.currentcolumn, "to", WTile.currentrow, WTile.currentcolumn)
+		find_path(WTile, Array)
+
+
+def color_untravelable_path(Array, display):
+	for x in range(7):
+		for y in range(7):
+			if Array[x][y].travelable is 0:
+				Array[x][y].image.fill((150, 0, 0, 255), special_flags=pygame.BLEND_RGB_MULT) #Color unmoveable path red
+				display.blit(Array[x][y].image, (get_tile_coordinates(y, x)))
+
+
+def move_player(tile, Array, display, PlayerPos):
+	if tile.travelable is 1:
+		for x in range(7):
+			for y in range(7):
+				Array[y][x].get_image_filepath()
+				Array[y][x].draw(display, (get_tile_coordinates(x, y)))
+				Array[y][x].travelable = 0
+				Array[y][x].p1 = 0
+		display.blit(pygame.image.load(r'LabyrinthPlayerOneT.png'), (get_tile_coordinates(tile.currentcolumn, tile.currentrow)))
+		tile.p1 = 1
+		PlayerPos = tile
+		print("Player moved to", tile.currentcolumn, tile.currentrow)
+
